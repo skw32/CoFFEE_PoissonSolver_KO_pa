@@ -1,0 +1,89 @@
+From 5f51cc765183c03a2253ee3c40e15e233113c64a Mon Sep 17 00:00:00 2001
+From: "N. Ben Cohen" <breathevalue@icloud.com>
+Date: Sat, 16 Mar 2019 10:22:25 +0100
+Subject: [PATCH] Add alternative setup.py script
+
+---
+ setup_package.py | 70 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+ create mode 100644 setup_package.py
+
+diff --git setup_package.py setup_package.py
+new file mode 100644
+index 0000000..63fef5d
+--- /dev/null
++++ setup_package.py
+@@ -0,0 +1,70 @@
++from distutils.core import setup
++from distutils.extension import Extension
++#from Cython.Distutils import build_ext
++
++#Check the dependencies
++try:
++  import scipy
++except ImportError:
++  print("scipy not found. Please install scipy: https://www.scipy.org/install.html")
++
++try:
++  import numpy
++except ImportError:
++  print("Numpy not found. Please install Numpy: https://docs.scipy.org/doc/numpy/user/install.html")
++
++try:
++  import mpi4py
++except ImportError:
++  print("mpi4py not found. Please install mpi4py: https://mpi4py.scipy.org/docs/usrman/install.html")
++
++try:
++  import matplotlib
++except ImportError:
++  print("matplotlib not found. Please install matplotlib: http://matplotlib.org/users/installing.html")
++
++
++# If Cython is installed, cythonize the .pyx files. 
++# Else, the .c files are used.
++try:
++    from Cython.Distutils import build_ext
++except ImportError:
++    use_cython = False
++else:
++    use_cython = True
++
++
++cmdclass = {}
++if use_cython:
++  ext_modules=[ Extension("PoissonSolver.matvec2D",
++              ["PoissonSolver/MV_2D_cy/matvec2D.pyx"],
++              extra_compile_args = ["-ffast-math"]),
++              Extension("PoissonSolver.matvec1D",
++              ["PoissonSolver/MV_1D_cy/matvec1D.pyx"],
++              extra_compile_args = ["-ffast-math"]),
++              Extension("PoissonSolver.ps3d",
++              ["PoissonSolver/PS_3D_cy/ps3d.pyx"],
++              extra_compile_args = ["-ffast-math"])
++            ]
++  cmdclass.update({ 'build_ext': build_ext })
++else:
++  ext_modules=[ Extension("PoissonSolver.matvec2D",
++              ["PoissonSolver/MV_2D_cy/matvec2D.c"],
++              extra_compile_args = ["-ffast-math"]),
++              Extension("PoissonSolver.matvec1D",
++              ["PoissonSolver/MV_1D_cy/matvec1D.c"],
++              extra_compile_args = ["-ffast-math"]),
++              Extension("PoissonSolver.ps3d",
++              ["PoissonSolver/PS_3D_cy/ps3d.c"],
++              extra_compile_args = ["-ffast-math"])
++            ]
++
++setup(
++  name = "PoissonSolver",
++  packages=['PoissonSolver'],
++  author="Mit H Naik",
++  author_email = "mitnaik@physics.iisc.ernet.in",
++  cmdclass = cmdclass,
++  ext_modules = ext_modules,
++  include_dirs = [numpy.get_include()] 
++)
+-- 
+2.17.2 (Apple Git-113)
+

@@ -1,0 +1,59 @@
+package:
+  name: coffee_poisson_solver
+  version: 1.1
+
+source:
+  path: ../
+  patches:
+    # List any patch files here
+    - 0001-Add-alternative-setup.py-script.patch
+
+build:
+  # entry_points:
+  # Put any entry points (scripts to be generated automatically) here. The
+  # syntax is module:function.  For example
+  #
+  # - msgpack-python = msgpack-python:main
+  #
+  # Would create an entry point called msgpack-python that calls msgpack-python.main()
+  # just always use build number 0 ...
+  number: 0
+
+requirements:
+  build:
+    - python=3.6
+    - setuptools
+    - mpi4py
+    - numpy
+    - scipy
+    - matplotlib
+    - ipython
+    - sympy
+  run:
+    - python=3.6
+    - mpi4py
+    - numpy
+    - scipy
+    - matplotlib
+    - ipython
+    - sympy
+test:
+  # Python imports
+  imports:
+    - PoissonSolver
+
+  commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+    # You can also put a file called run_test.py in the recipe that will be run
+    # at test time.
+    # requires:
+    # Put any additional test requirements here.  For example
+    # - nosetests
+
+about:
+  home: https://github.com/breathe/coffee_conda_package
+  license: BSD 3-Clause
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
