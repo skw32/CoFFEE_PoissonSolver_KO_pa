@@ -1,0 +1,4 @@
+matvec.pyx contains the Cython code
+
+Cythonize and generate matvec.so using:
+python setup.py build_ext --inplace

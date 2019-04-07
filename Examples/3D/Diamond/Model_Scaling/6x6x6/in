@@ -1,0 +1,26 @@
+&CELL_PARAMETERS
+
+Lattice_Vectors(normalized):
+1.000000000   0.000000000   0.000000000
+0.000000000   1.000000000   0.000000000
+0.000000000   0.000000000   1.000000000
+
+Cell_dimensions bohr
+39.89149 39.89149 39.89149
+
+Ecut=20.0 Hartree 
+/
+
+&DIELECTRIC_PARAMETERS Bulk
+Epsilon1_a1 = 7.49
+Epsilon1_a2 = 6.92
+Epsilon1_a3 = 7.19
+/
+
+&GAUSSIAN_PARAMETERS:
+Total_charge = 1
+Sigma = 2.614
+Centre_a1 = 0.5
+Centre_a2 = 0.5
+Centre_a3 = 0.5
+/
