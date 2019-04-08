@@ -1,3 +1,11 @@
+CoFFEE v1.1 software package with modified file '/PoissonSolver/PS_3D_cy/ps3d.pyx' for performing Kumagai-Oba potential alignment method (doi: 10.1103/PhysRevB.89.195205). For original version of the CoFFEE software package, see here: https://www.sciencedirect.com/science/article/pii/S0010465518300158
+
+This version of the CoFFEE poisson solver is used in the defect corrections workflow (https://github.com/skw32/DefectCorrectionsNotebook)[here].
+
+----------------------------------------------------------
+
+
+# README from original CoFFEE_1.1 package
 
 CoFFEE: Corrections For Formation Energy and Eigenvalues
 is a complete electrostatic corrections package applicable 
