@@ -6,7 +6,7 @@
 # >>> travis encrypt CONDA_UPLOAD_TOKEN="..." --add
 
 # Configure these two variables
-PKG_NAME=coffee_poisson_solver_KO
+PKG_NAME=coffee_poisson_solver_ko
 
 # Owner of conda package
 USER=suzannekwallace
