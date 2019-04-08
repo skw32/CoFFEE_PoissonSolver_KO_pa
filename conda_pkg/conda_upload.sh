@@ -6,10 +6,10 @@
 # >>> travis encrypt CONDA_UPLOAD_TOKEN="..." --add
 
 # Configure these two variables
-PKG_NAME=coffee_poisson_solver
+PKG_NAME=coffee_poisson_solver_KO
 
 # Owner of conda package
-USER=breathe
+USER=suzannekwallace
 
 # disable anaconda auto-upload (can't taken token credential)
 conda config --set anaconda_upload yes
