@@ -4,4 +4,6 @@ CoFFEE v1.1 software package with modified file '/PoissonSolver/PS_3D_cy/ps3d.py
 
 This version of the CoFFEE poisson solver has been made into a conda package for use in the defect corrections workflow here: https://github.com/skw32/DefectCorrectionsNotebook
 
-This package can be installed using: conda install ???
+This package can be installed by
+
+`conda install ???`
