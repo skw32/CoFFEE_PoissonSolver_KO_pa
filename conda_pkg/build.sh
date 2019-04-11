@@ -1,6 +1,7 @@
 #!/bin/bash
 
-$PYTHON setup_package.py install
+$PYTHON clean.py
+$PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.
 

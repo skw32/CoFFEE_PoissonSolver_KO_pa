@@ -4,9 +4,6 @@ package:
 
 source:
   path: ../
-  patches:
-    # List any patch files here
-    - 0001-Add-alternative-setup.py-script.patch
 
 build:
   # entry_points:
@@ -29,6 +26,7 @@ requirements:
     - matplotlib
     - ipython
     - sympy
+    - cython
   run:
     - python=3.6
     - mpi4py
