@@ -1,22 +1,22 @@
 os:
-- linux
-- osx
+  - linux
+  - osx
 install:
-- cd ./conda_pkg
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-  -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  -O miniconda.sh; fi
-- bash miniconda.sh -b -p $HOME/miniconda
-- rm miniconda.sh
-- export PATH="$HOME/miniconda/bin:$PATH"
-- hash -r
-- conda config --set always_yes yes --set changeps1 no
-- conda update -q conda
+  - cd ./conda_pkg
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+    -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    -O miniconda.sh; fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - rm miniconda.sh
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
 script:
-- echo "Building"
+  - echo "Building"
 after_success:
-- test $TRAVIS_BRANCH = "master" && conda install conda-build && conda install anaconda-client
-  && conda install conda-verify && bash conda_upload.sh
+  - conda install conda-build anaconda-client conda-verify
+  - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -x ./conda_build.sh; else bash -x ./conda_upload.sh; fi
 env:
   global:
     secure: YkafkzrSoHls+6VCi3SpUtj1+nLRqyQtozAxE4m+/YPCI485+/Zb4jlg0h6+A03qOCJlDQU1RTFOkNv9w/znoQz/dtSHiyS9/QktrOUuIOslQuWAiJQBdWpxPxV462cZCAL57moWnlQaiZIpj6jz3Xih7iS/lDDkgzus3V8+nSM8lKj5uV+1MSzgIEwJfpimInZS/94WdV6VKl+o+gN222Ayy2x21pnbR6/nxLQc/W/GRZRz2Jglr6MTO3bEkFX0bQxqsY1/61FudeKDJ6IvYGA7vbPS5PuKgwViRxXVnG3AZ3MUfBEPVhaNKUTdOz5/XMZV+EBrweGXm3YS4XFB7Exn0H4Yqo26ZiIexUTcD21IAd8b6BBNw1lokec1VAYiS2i+S57sv2i40jdUNGULDb1LeGH2qiMF2F+1uCQg2NiuzjDlBq8dJkpbphx6BDzHxU8dHp9gwaq5JmjXZDyZKDnP4gM/Dmx6mzHq1gv3uTdDi1NdysaaVsbXZNzZOAjze15PntgAOCm5N1YZhgMls2c1FZ+z4KMgthY+wvCPL9Cy9az0Wx3YC8dTuFX1dWM1ldBEJ+0ni0T4cVn6/GKy2Ng4EqB0mAkSOEsW8gtgD3FxeRoESzpniNksm2LqY04sTQmD8JQ9NROZUn8/k4DkieGhtyd9YvuBi+/Ly7I9mg0=

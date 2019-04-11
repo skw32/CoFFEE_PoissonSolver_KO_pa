@@ -24,43 +24,53 @@ except ImportError:
   print("matplotlib not found. Please install matplotlib: http://matplotlib.org/users/installing.html")
 
 
-# If Cython is installed, cythonize the .pyx files. 
-# Else, the .c files are used.
+# always run the cythonize build step
+use_cython = True
 try:
     from Cython.Distutils import build_ext
+    from Cython.Compiler import Options
+
+    compiler_directives = Options.get_directive_defaults()
+
+    # don't include host-specific metadata in generated .c files -- this allows storing the generated .c files in git
+    # If you are debugging the .c files, you might change this temporarily 
+    compiler_directives["emit_code_comments"] = False  # works
+
 except ImportError:
-    use_cython = False
-else:
-    use_cython = True
+  print("Cython not found. Please install Cython: https://cython.readthedocs.io/en/latest/src/quickstart/install.html")
+  raise
+
+
 
 
 cmdclass = {}
 if use_cython:
-  ext_modules=[ Extension("matvec2D",
+  ext_modules=[ Extension("PoissonSolver.matvec2D",
               ["PoissonSolver/MV_2D_cy/matvec2D.pyx"],
               extra_compile_args = ["-ffast-math"]),
-              Extension("matvec1D",
+              Extension("PoissonSolver.matvec1D",
               ["PoissonSolver/MV_1D_cy/matvec1D.pyx"],
               extra_compile_args = ["-ffast-math"]),
-              Extension("ps3d",
+              Extension("PoissonSolver.ps3d",
               ["PoissonSolver/PS_3D_cy/ps3d.pyx"],
               extra_compile_args = ["-ffast-math"])
             ]
   cmdclass.update({ 'build_ext': build_ext })
 else:
-  ext_modules=[ Extension("matvec2D",
+  ext_modules=[ Extension("PoissonSolver.matvec2D",
               ["PoissonSolver/MV_2D_cy/matvec2D.c"],
               extra_compile_args = ["-ffast-math"]),
-              Extension("matvec1D",
+              Extension("PoissonSolver.matvec1D",
               ["PoissonSolver/MV_1D_cy/matvec1D.c"],
               extra_compile_args = ["-ffast-math"]),
-              Extension("ps3d",
+              Extension("PoissonSolver.ps3d",
               ["PoissonSolver/PS_3D_cy/ps3d.c"],
               extra_compile_args = ["-ffast-math"])
             ]
 
 setup(
-  name = "CoFFEE",
+  name = "PoissonSolver",
+  packages=['PoissonSolver'],
   author="Mit H Naik",
   author_email = "mitnaik@physics.iisc.ernet.in",
   cmdclass = cmdclass,

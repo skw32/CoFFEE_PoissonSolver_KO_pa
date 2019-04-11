@@ -1,4 +1,4 @@
-# Steps to get anaconda credentials into travis-ci in expected form:
+# Pre-condition: you'll need get an authentication token capable of publishing to desired anaconda channel and stash it in travis-ci secret store.  Steps to do that:
 # 1. Create a conda token
 # >>> anaconda login
 # >>> anaconda auth -c -n travis-ci --max-age 307584000 --url https://anaconda.org/USERNAME/PACKAGENAME --scopes "api:write api:read"
@@ -11,8 +11,6 @@ PKG_NAME=coffee_poisson_solver_ko
 # Owner of conda package
 USER=suzannekwallace
 
-# disable anaconda auto-upload (can't taken token credential)
+# build and upload the package to channel -- assumes security token/username are defined in environment variable CONDA_UPLOAD_TOKEN and USER
 conda config --set anaconda_upload yes
-
-# build and upload the package
 conda-build --token $CONDA_UPLOAD_TOKEN --user $USER .
