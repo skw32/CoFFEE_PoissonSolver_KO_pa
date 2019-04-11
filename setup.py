@@ -28,9 +28,19 @@ except ImportError:
 use_cython = True
 try:
     from Cython.Distutils import build_ext
+    from Cython.Compiler import Options
+
+    compiler_directives = Options.get_directive_defaults()
+
+    # don't include host-specific metadata in generated .c files -- this allows storing the generated .c files in git
+    # If you are debugging the .c files, you might change this temporarily 
+    compiler_directives["emit_code_comments"] = False  # works
+
 except ImportError:
   print("Cython not found. Please install Cython: https://cython.readthedocs.io/en/latest/src/quickstart/install.html")
   raise
+
+
 
 
 cmdclass = {}
