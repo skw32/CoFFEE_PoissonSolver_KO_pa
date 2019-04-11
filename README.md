@@ -6,4 +6,4 @@ This version of the CoFFEE poisson solver has been made into a conda package for
 
 This package can be installed by
 
-`conda install ???`
+`conda install -c suzannekwallace coffee_poisson_solver_ko`
