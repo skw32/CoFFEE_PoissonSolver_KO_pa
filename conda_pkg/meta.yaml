@@ -12,9 +12,8 @@ build:
   #
   # - msgpack-python = msgpack-python:main
   #
-  # Would create an entry point called msgpack-python that calls msgpack-python.main()
-  # just always use build number 0 ...
-  number: 0
+  # Use number of commits since last tag as build number -- imperfect but mostly monotonic ...
+  number: "{{GIT_DESCRIBE_NUMBER}}"
 
 requirements:
   build:
