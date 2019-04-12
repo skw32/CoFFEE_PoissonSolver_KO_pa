@@ -1,0 +1,6 @@
+atomic_V.pyx contains the Cython code
+
+Cythonize and generate atomic_V.so using:
+python setup.py build_ext --inplace
+
+NOTE: the setup.py in this directory is FAKE and exists used just for interactive development purposes -- it does not influence the build performed by the real root setup.py when building the coffee package

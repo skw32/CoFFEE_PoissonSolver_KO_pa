@@ -44,29 +44,21 @@ except ImportError:
 
 
 cmdclass = {}
-if use_cython:
-  ext_modules=[ Extension("PoissonSolver.matvec2D",
-              ["PoissonSolver/MV_2D_cy/matvec2D.pyx"],
-              extra_compile_args = ["-ffast-math"]),
-              Extension("PoissonSolver.matvec1D",
-              ["PoissonSolver/MV_1D_cy/matvec1D.pyx"],
-              extra_compile_args = ["-ffast-math"]),
-              Extension("PoissonSolver.ps3d",
-              ["PoissonSolver/PS_3D_cy/ps3d.pyx"],
-              extra_compile_args = ["-ffast-math"])
-            ]
-  cmdclass.update({ 'build_ext': build_ext })
-else:
-  ext_modules=[ Extension("PoissonSolver.matvec2D",
-              ["PoissonSolver/MV_2D_cy/matvec2D.c"],
-              extra_compile_args = ["-ffast-math"]),
-              Extension("PoissonSolver.matvec1D",
-              ["PoissonSolver/MV_1D_cy/matvec1D.c"],
-              extra_compile_args = ["-ffast-math"]),
-              Extension("PoissonSolver.ps3d",
-              ["PoissonSolver/PS_3D_cy/ps3d.c"],
-              extra_compile_args = ["-ffast-math"])
-            ]
+
+ext_modules=[ Extension("PoissonSolver.matvec2D",
+            ["PoissonSolver/MV_2D_cy/matvec2D.pyx"],
+            extra_compile_args = ["-ffast-math"]),
+            Extension("PoissonSolver.matvec1D",
+            ["PoissonSolver/MV_1D_cy/matvec1D.pyx"],
+            extra_compile_args = ["-ffast-math"]),
+            Extension("PoissonSolver.ps3d",
+            ["PoissonSolver/PS_3D_cy/ps3d.pyx"],
+            extra_compile_args = ["-ffast-math"]),
+            Extension("PoissonSolver.atomic_V",
+            ["PoissonSolver/atomic_calculate/atomic_V.pyx"],
+            extra_compile_args = ["-ffast-math"]),
+        ]
+cmdclass.update({ 'build_ext': build_ext })
 
 setup(
   name = "PoissonSolver",
