@@ -4,13 +4,10 @@
 # >>> anaconda auth -c -n travis-ci --max-age 307584000 --url https://anaconda.org/USERNAME/PACKAGENAME --scopes "api:write api:read"
 # 2. Add conda token in encrypted form to .travis.yml -- exposes token as environment variable CONDA_UPLOAD_TOKEN to travis-ci execution environment
 # >>> travis encrypt CONDA_UPLOAD_TOKEN="..." --add
+# 3. Add conda username to .travis.yml
+# >>> travis encrypt CONDA_USER="suzannekwallace" --add
 
-# Configure these two variables
-PKG_NAME=coffee_poisson_solver_ko
-
-# Owner of conda package
-USER=suzannekwallace
 
 # build and upload the package to channel -- assumes security token/username are defined in environment variable CONDA_UPLOAD_TOKEN and USER
 conda config --set anaconda_upload yes
-conda-build --token $CONDA_UPLOAD_TOKEN --user $USER .
+conda-build --token $CONDA_UPLOAD_TOKEN --user $CONDA_USER .

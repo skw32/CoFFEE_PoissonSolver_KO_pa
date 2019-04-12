@@ -1,21 +1,23 @@
 os:
-  - linux
-  - osx
+- linux
+- osx
 install:
-  - cd ./conda_pkg
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-    -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    -O miniconda.sh; fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - rm miniconda.sh
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
+- cd ./conda_pkg
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+  -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  -O miniconda.sh; fi
+- bash miniconda.sh -b -p $HOME/miniconda
+- rm miniconda.sh
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda
 script:
-  - echo "Building"
-  - conda install conda-build anaconda-client conda-verify
-  - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -x ./conda_build.sh; else bash -x ./conda_upload.sh; fi
+- echo "Building"
+- conda install conda-build anaconda-client conda-verify
+- if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -x ./conda_build.sh; else
+  bash -x ./conda_upload.sh; fi
 env:
   global:
-    secure: YkafkzrSoHls+6VCi3SpUtj1+nLRqyQtozAxE4m+/YPCI485+/Zb4jlg0h6+A03qOCJlDQU1RTFOkNv9w/znoQz/dtSHiyS9/QktrOUuIOslQuWAiJQBdWpxPxV462cZCAL57moWnlQaiZIpj6jz3Xih7iS/lDDkgzus3V8+nSM8lKj5uV+1MSzgIEwJfpimInZS/94WdV6VKl+o+gN222Ayy2x21pnbR6/nxLQc/W/GRZRz2Jglr6MTO3bEkFX0bQxqsY1/61FudeKDJ6IvYGA7vbPS5PuKgwViRxXVnG3AZ3MUfBEPVhaNKUTdOz5/XMZV+EBrweGXm3YS4XFB7Exn0H4Yqo26ZiIexUTcD21IAd8b6BBNw1lokec1VAYiS2i+S57sv2i40jdUNGULDb1LeGH2qiMF2F+1uCQg2NiuzjDlBq8dJkpbphx6BDzHxU8dHp9gwaq5JmjXZDyZKDnP4gM/Dmx6mzHq1gv3uTdDi1NdysaaVsbXZNzZOAjze15PntgAOCm5N1YZhgMls2c1FZ+z4KMgthY+wvCPL9Cy9az0Wx3YC8dTuFX1dWM1ldBEJ+0ni0T4cVn6/GKy2Ng4EqB0mAkSOEsW8gtgD3FxeRoESzpniNksm2LqY04sTQmD8JQ9NROZUn8/k4DkieGhtyd9YvuBi+/Ly7I9mg0=
+  - secure: YkafkzrSoHls+6VCi3SpUtj1+nLRqyQtozAxE4m+/YPCI485+/Zb4jlg0h6+A03qOCJlDQU1RTFOkNv9w/znoQz/dtSHiyS9/QktrOUuIOslQuWAiJQBdWpxPxV462cZCAL57moWnlQaiZIpj6jz3Xih7iS/lDDkgzus3V8+nSM8lKj5uV+1MSzgIEwJfpimInZS/94WdV6VKl+o+gN222Ayy2x21pnbR6/nxLQc/W/GRZRz2Jglr6MTO3bEkFX0bQxqsY1/61FudeKDJ6IvYGA7vbPS5PuKgwViRxXVnG3AZ3MUfBEPVhaNKUTdOz5/XMZV+EBrweGXm3YS4XFB7Exn0H4Yqo26ZiIexUTcD21IAd8b6BBNw1lokec1VAYiS2i+S57sv2i40jdUNGULDb1LeGH2qiMF2F+1uCQg2NiuzjDlBq8dJkpbphx6BDzHxU8dHp9gwaq5JmjXZDyZKDnP4gM/Dmx6mzHq1gv3uTdDi1NdysaaVsbXZNzZOAjze15PntgAOCm5N1YZhgMls2c1FZ+z4KMgthY+wvCPL9Cy9az0Wx3YC8dTuFX1dWM1ldBEJ+0ni0T4cVn6/GKy2Ng4EqB0mAkSOEsW8gtgD3FxeRoESzpniNksm2LqY04sTQmD8JQ9NROZUn8/k4DkieGhtyd9YvuBi+/Ly7I9mg0=
+  - secure: b56ImfaVkJu5yLRDL2rLKnv6FCJHwE/MvOeL+CvA7iJiLjIo70kK0UwU+EyyTu3LergeKh4XujPdQLt+Qiw1KkpNfSSQsbveQ5wdqSdzrkzSkx60YwGRxPCnKYVY8d7WbEeYagX2+YBvE3Ugx/crN5CPA8WXKYBo3gbWz0n9Uj1XvEZbB5TVzol+kOT1Kwl7F8dsrcq9QE2SiIt15bAw+YdlgFBqmATdG2bRq+JhAhVoVN5aPkTmPdV58OQCOkhsBEBt/wGEPRs/DyZmhEXNhc6PpXjb/PQQGgYF3VKY5TXVtovfcgdkVTYza6bO0rvNzRTD/UGq1R5U9DhqIzutnBTG0P/7hw9OheHWy+YHDWhP2ttA/vRbIZDJoclmq4nNJ3Fm98htFY6+d7SWCQ+yI5Vf8Lsz+tzR67ZCf+7JFuumgnx05eO3XWqbG9GO6n7x4OoWkRHTb3p3Xqq/NTlX0yFBmAHftC6ikux8/sKOCwUtLyRVchxA8LcwETiVKJOR0qagT9pNOaedA9cK3XoNY1vl7q1PnZg9AFuA/3RfmUrDY2pmLsHMCwzYa4uc7NRLPOJBF3sk8gZi2l9ZRKa2d8ChO5SgOweEe35kTzPI21kbkBzL1AMDeCppJsxa9oY8xLZ5xP+FYGEJdIx+6Yd46z9w4rxkhKWnHGCgZdlqVBk=
