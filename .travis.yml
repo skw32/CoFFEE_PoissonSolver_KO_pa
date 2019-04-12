@@ -14,7 +14,6 @@ install:
   - conda update -q conda
 script:
   - echo "Building"
-after_success:
   - conda install conda-build anaconda-client conda-verify
   - if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then bash -x ./conda_build.sh; else bash -x ./conda_upload.sh; fi
 env:
