@@ -17,6 +17,8 @@ build:
 
 requirements:
   build:
+    - "{{ compiler('cxx') }}"
+  host:
     - python=3.6
     - setuptools
     - mpi4py
@@ -29,7 +31,7 @@ requirements:
   run:
     - python=3.6
     - mpi4py
-    - numpy
+    - "{{ pin_compatible('numpy') }}"
     - scipy
     - matplotlib
     - ipython
