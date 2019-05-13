@@ -1,12 +1,11 @@
 #!/bin/bash -x
 
-# needed for some tests
-brew install tree wget
+brew install wget
+
+sudo mkdir -p /opt && sudo chown $(whoami) /opt && sudo chmod u+w /opt
 
 # install MacOS 10.9 sdk to /opt/MacOSX10.9.sdk
 (
-    sudo mkdir -p /opt
-    sudo chmod oug+w /opt
     cd /opt
     wget https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.9.sdk.tar.xz
     tar -xf MacOSX10.9.sdk.tar.xz

@@ -1,9 +1,10 @@
 os:
   - linux
   - osx
+pre_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash -x macos_ci_setup.sh; fi
 install:
   - cd ./conda_pkg
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash -x macos_ci_setup.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
     -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     -O miniconda.sh; fi
