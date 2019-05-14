@@ -1,6 +1,7 @@
 os:
   - linux
   - osx
+pre_install:
 install:
   - cd ./conda_pkg
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash -x macos_ci_setup.sh; fi

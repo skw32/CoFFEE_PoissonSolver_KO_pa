@@ -1,13 +1,14 @@
-This directory contains the recipe for building a conda package for CoFFEE.
+# Conda package wrapping CoFFEE project
 
-To use/test:
+To use -- with current working directory containing meta.yaml:
 
-First create a conda build environment with the tools needed to run the `conda-build` command
-
-1. `conda create -n conda-build-env python=3.6`
+1. `conda create -n python=3 conda-build-env conda-build anaconda-client conda-verify`
 2. `conda activate conda-build-env`
-3. `conda install conda-build conda-verify anaconda-client`
+3. `conda-build . -c conda-forge`
 
-Then run `conda-build .` from this directory (NOTE: this does not modify your `conda-build-env` -- you can reuse this environment to test conda package build process and don't have to recreate it everytime)
+## Build Environment setup requirements (macOS)
 
-1. `conda-build .`
+Ensure install of the [macOS 10.9 sdk](https://github.com/phracker/MacOSX-SDKs/releases).
+
+(you can use this script but check what it does first to confirm you are happy with the modifications it will perform)
+bash -x macos_ci_setup.sh
