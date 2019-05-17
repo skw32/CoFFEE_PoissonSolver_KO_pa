@@ -22,7 +22,7 @@ def PS_3Dg(
   cdef double[:,:,:] G2_a = np.zeros((2*imax+1, 2*jmax+1, 2*kmax+1))
   cdef double[:,:,:] G3_a = np.zeros((2*imax+1, 2*jmax+1, 2*kmax+1))
   pi = np.pi
-  print "TZ test ps_3dg"
+#  print "TZ test ps_3dg"
   for i in range(-imax, imax+1):
     for j in range(-jmax,jmax+1):
       for k in range(-kmax,kmax+1):
