@@ -20,18 +20,16 @@ def atomic_3d(
              double[:,:,:] G1, 
              double[:,:,:] G2,
              double[:,:,:] G3):
-    cdef int i,j,k,l,jmax,kmax,lmax 
+    cdef int i,j,k,l,jmax,kmax,lmax
     cdef double[:] G = np.zeros((3))
     cdef double[:] R = np.zeros((3))
-    if (defect_type == 'antisite' or defect_type == 'vacancy'):
-        cdef double[:] V_atomic = np.zeros((host_atom_num-1))
-    else: # include all atoms in host supercell for interstitial
-        cdef double[:] V_atomic = np.zeros((host_atom_num))
+
+    cdef double[:] V_atomic = np.zeros((host_atom_num))
     cdef complex second 
     cdef double  third 
     #print "TZ test calculations"
 
-    if (defect_type == 'vacancy' or defect_type='antisite'):
+    if (defect_type == 'vacancy' or defect_type=='antisite'):
         jmax = (grid[0]-1)/2
         kmax = (grid[1]-1)/2
         lmax = (grid[2]-1)/2
@@ -120,4 +118,7 @@ def atomic_3d(
                         third = np.exp(-0.5*np.dot(G,G)*beta*beta)
                         V_atomic[i] += np.real(second*third) 
 
-    return np.array(V_atomic)
+    if (defect_type == 'antisite' or defect_type == 'vacancy'):
+        return np.array(V_atomic)[:-1]
+    else: # include all atoms in host supercell for interstitial
+        return np.array(V_atomic)
