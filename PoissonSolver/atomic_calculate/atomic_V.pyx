@@ -31,7 +31,7 @@ def atomic_3d(
     cdef double  third 
     #print "TZ test calculations"
 
-    if (defect_type == 'vacancy' or defect_type='antisite'):
+    if (defect_type == 'vacancy' or defect_type == 'antisite'):
         jmax = (grid[0]-1)/2
         kmax = (grid[1]-1)/2
         lmax = (grid[2]-1)/2
